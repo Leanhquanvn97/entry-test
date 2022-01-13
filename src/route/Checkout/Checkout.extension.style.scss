@@ -1,0 +1,53 @@
+.checkout-progress-bar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--breadcrumbs-background);
+    height: 120px;
+    z-index: -2;
+
+    .progress-bar{
+        top: 47px;
+        position: absolute;
+        left: 0px;
+        height: 5px;
+        background-color: $default-primary-base-color;
+        transition: all 1s;
+        max-width: 100%;
+    }
+    .progress{  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+    &.checkout-progress-bar::after{
+        position: absolute;
+        content: '';
+        top: 47px;
+        width: 100%;
+        height: 5px;
+        background-color: $default-secondary-dark-color;
+        z-index: -10;
+
+    }
+    .progress-step{
+        text-align: center;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        background-color: $default-secondary-dark-color;
+        transition: background-color 2000ms;
+        box-shadow: 0px 0px 0px 5px var(--breadcrumbs-background);
+    }
+    .progress-step.selected{
+        color: white;
+        background-color: $default-primary-base-color;
+    }
+    .progress-text{
+        padding-top:5px;
+        font-weight: bold;
+    }
+    
+}
