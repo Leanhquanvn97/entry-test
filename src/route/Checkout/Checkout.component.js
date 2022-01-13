@@ -1,5 +1,6 @@
 import {Checkout as SourceCheckout} from 'SourceRoute/Checkout/Checkout.component';
 import './Checkout.extension.style'
+import ContentWrapper from 'Component/ContentWrapper';
 
 /** @namespace Route/Checkout/Component */
 export class Checkout extends SourceCheckout{
@@ -7,7 +8,7 @@ export class Checkout extends SourceCheckout{
         currentProgress: '',
         step: 0
     }
-    componentDidUpdate=()=>{
+    componentDidUpdate = () => {
         const keys = Object.keys(this.stepMap);
         let id = keys.indexOf(this.state.currentProgress);
         if(this.props.checkoutStep)
@@ -44,15 +45,34 @@ export class Checkout extends SourceCheckout{
             )
         });
     }
-    renderProgressBar(){
-        
-        console.log( this.state.step)
-        return(
-            <div className='checkout-progress-bar'>  
-            <div className='progress-bar' style={{width:(this.state.step+1)*34+"%"}}></div>
-                {this.renderProgress()}
-            </div>
-        )
+    
+    render(){
+        return (
+            <main block="Checkout">
+                <div className='checkout-progress-bar'>  
+                    <div className='progress-bar' style={{width:(this.state.step+1)*34+"%"}}></div>
+                    {this.renderProgress()}
+                </div>
+
+                <ContentWrapper
+                  wrapperMix={ { block: 'Checkout', elem: 'Wrapper' } }
+                  label={ __('Checkout page') }
+                >
+                    { this.renderSummary(true) }
+                    <div block="Checkout" elem="Step">
+                        { this.renderTitle() }
+                        { this.renderGuestForm() }
+                        { this.renderStep() }
+                        { this.renderLoader() }
+                    </div>
+                    <div>
+                        { this.renderSummary() }
+                        { this.renderPromo() }
+                        { this.renderCoupon() }
+                    </div>
+                </ContentWrapper>
+            </main>
+        );
     }
 }
 
